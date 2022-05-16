@@ -19,4 +19,20 @@ export default class ProductsControllers {
       next(e);
     }
   };
+  
+  public create =
+  async (
+    req: Request,
+    res: Response,
+    next: NextFunction,
+  ): Promise<Response | void> => {
+    try {
+      const { name, amount } = req.body;
+      const product = await this.service.create(name, amount);
+
+      return res.status(StatusCodes.CREATED).json(product);
+    } catch (e) {
+      next(e);
+    }
+  };
 }

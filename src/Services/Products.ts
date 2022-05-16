@@ -9,4 +9,10 @@ export default class ProductService {
 
     return products;
   };
+
+  public create = async (name: string, amount: number | string): Promise<IProduct | void> => {
+    const product = await this.model.create(name, amount);
+
+    return product;
+  };
 }

@@ -1,8 +1,8 @@
 interface IProduct {
   id: number;
   name: string;
-  amount: number;
-  orderId: number;    
+  amount: number | string;
+  orderId: number | null;    
 }
 
 export default IProduct;
