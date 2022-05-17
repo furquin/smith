@@ -35,7 +35,7 @@ export default class ProductsControllers {
     try {
       const order = await this.service.create(user, productsIds);
 
-      return res.status(StatusCodes.OK).json(order);
+      return res.status(StatusCodes.CREATED).json(order);
     } catch (e: unknown) {
       next(e);
     }
