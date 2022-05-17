@@ -4,11 +4,11 @@ class TokenService {
   public secret = 'segredo';
 
   public jwtConfig: SignOptions = {
-    expiresIn: '30min',
+    expiresIn: '30d',
     algorithm: 'HS256',
   };
 
-  public createToken = (user: string): string => {
+  public createToken = (user: object): string => {
     const token = jwt.sign({ user }, this.secret, this.jwtConfig);
     return token;
   };
