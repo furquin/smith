@@ -7,6 +7,7 @@ const routes = Router();
 
 routes
   .route('/')
-  .get(ordersController.getAll);
+  .get(ordersController.getAll)
+  .post(ordersController.create);
 
 export default routes;

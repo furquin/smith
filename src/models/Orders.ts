@@ -23,4 +23,14 @@ export default class ProductModel {
     
     return ordersProducts as IOrders[];
   };
+
+  public create = async (userId: number): Promise<void> => {
+    await Connection.execute(
+      `INSERT INTO 
+      Trybesmith.Orders
+      (userId) VALUES
+      (?);`,
+      [userId],
+    );
+  };
 }

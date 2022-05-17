@@ -9,11 +9,11 @@ class TokenService {
   };
 
   public createToken = (user: object): string => {
-    const token = jwt.sign({ user }, this.secret, this.jwtConfig);
+    const token = jwt.sign(user, this.secret, this.jwtConfig);
     return token;
   };
 
-  public decoded = (token: string) => {
+  public decoded = (token: any): object | string => {
     const decode = jwt.verify(token, this.secret);
     return decode;
   };

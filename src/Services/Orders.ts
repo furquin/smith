@@ -9,4 +9,10 @@ export default class ProductService {
 
     return orders;
   };
+
+  public create = async (userId: any, productsIds: Array<number>): Promise<object> => {
+    await this.model.create(userId.id);
+
+    return { userId: userId.id, productsIds };
+  };
 }
