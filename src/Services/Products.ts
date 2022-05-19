@@ -15,4 +15,10 @@ export default class ProductService {
 
     return product;
   };
+
+  public getById = async (id: number): Promise<IProduct[]> => {
+    const products = await this.model.getById(id);
+
+    return products as IProduct[];
+  };
 }

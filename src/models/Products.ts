@@ -20,4 +20,11 @@ export default class ProductModel {
 
     return { id: product.insertId, name, amount, orderId: null };
   };
+
+  public getById = async (id: number): Promise<IProduct[] | void> => {
+    const [product] = await Connection
+      .execute('SELECT id FROM Trybesmith.Products WHERE id = ?', [id]);
+
+    return product as IProduct[];
+  };
 }

@@ -17,10 +17,25 @@ export default class ValidateData {
     if (error) {
       if (error?.message.includes('required')) {
         return res.status(StatusCodes.BAD_REQUEST).json({ message: error.message });
-      } 
+      }
       return res.status(StatusCodes.UNPROCESSABLE_ENTITY).json({ message: error?.message });
     }
     
+    next();
+  };
+
+  public productExists = async (req: Request, res: Response, next: NextFunction) => {
+    const { productsIds } = req.body;
+    
+    await Object.values(productsIds).map(async (_prod, index) => {
+      const product = await this.productService.getById(productsIds[index]);        
+      if (product.length === 0) {
+        return res
+          .status(StatusCodes.NOT_FOUND)
+          .json({ message: `Product, id:${productsIds[index]} does not exist found` });
+      }
+    });
+
     next();
   };
 }
