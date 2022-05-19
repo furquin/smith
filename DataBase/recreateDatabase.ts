@@ -6,7 +6,7 @@ import connection from '../src/models/connection';
 
 export default async function recreateDatabase(conn: Pool) {
   try {
-    const importPath = path.resolve(__dirname, 'Trybesmith.sql');
+    const importPath = path.resolve(__dirname, 'DataBase.sql');
     const seedDBContent = fs.readFileSync(importPath).toString();
     const queries = seedDBContent.split(';').filter((p) => p.trim());
     for (let i = 0; i < queries.length; i += 1) { 
@@ -19,11 +19,10 @@ export default async function recreateDatabase(conn: Pool) {
 }
 
 if (require.main === module) {
-
   recreateDatabase(connection)
     .then(async () => {
       console.log('Banco Restaurado com sucesso');
-      await connection.end()
+      await connection.end();
       process.exit(0);
     });
 }
