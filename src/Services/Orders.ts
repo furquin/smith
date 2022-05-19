@@ -11,8 +11,8 @@ export default class ProductService {
   };
 
   public create = async (userId: any, productsIds: Array<number>): Promise<object> => {
-    await this.model.create(userId.id);
-
+    await this.model.create(userId.id, productsIds);
+    
     return { userId: userId.id, productsIds };
   };
 }

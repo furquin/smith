@@ -1,3 +1,4 @@
+import { ResultSetHeader } from 'mysql2/promise';
 import Connection from './connection';
 import IOrders from '../Interfaces/orders.interface';
 
@@ -24,13 +25,21 @@ export default class ProductModel {
     return ordersProducts as IOrders[];
   };
 
-  public create = async (userId: number): Promise<void> => {
-    await Connection.execute(
+  public create = async (userId: number, productsIds: Array<number>): Promise<void> => {
+    const [order] = await Connection.execute<ResultSetHeader>(
       `INSERT INTO 
       Trybesmith.Orders
       (userId) VALUES
       (?);`,
       [userId],
     );
+
+    Object.values(productsIds).map(async (_prod, index) => {
+      await Connection.execute(`
+      UPDATE Trybesmith.Products
+      SET
+      orderId = ?
+      WHERE id = ?;`, [order.insertId, productsIds[index]]);
+    });
   };
 }
