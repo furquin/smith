@@ -17,8 +17,8 @@ routes
   .post(
     tokenMiddlewares.validateToken,
     orderMiddlewares.validateOrder,
-    ordersController.create,
     productMiddlewares.productExists,
+    ordersController.create,
   );
 
 export default routes;
