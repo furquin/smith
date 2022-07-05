@@ -48,7 +48,7 @@
 ```bash
     # Clonar repositório
 
-    $ git clone https://github.com/furquin/smith
+    $ git clone git@github.com:furquin/smith.git
 
     # Entrar no diretório
 
